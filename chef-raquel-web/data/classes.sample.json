@@ -1,0 +1,53 @@
+{
+  "_comment": "Datos de ejemplo para las clases. La chef las administra desde el panel interno. Precios: presencial CRC, en línea USD.",
+  "classes": [
+    {
+      "id": 1,
+      "slug": "pancake-de-kimchi",
+      "name": "Pancake de Kimchi",
+      "name_ko": "김치전",
+      "description": "El Pancake de Kimchi (Kimchi Jeon) se elabora mezclando kimchi fermentado con una masa de harina, agua y a veces huevo, y se fríe hasta quedar crujiente por fuera y suave por dentro. Destaca por su sabor picante y profundo, con mucho umami. Se sirve como aperitivo, acompañamiento o comida ligera.",
+      "why_learn": [
+        "Crujiente por fuera, suave por dentro — un snack lleno de sabor",
+        "Una forma diferente de disfrutar el kimchi, con mucho umami",
+        "Ideal como entrada, snack o acompañamiento",
+        "Fácil y rápido: en pocos minutos, una receta coreana auténtica"
+      ],
+      "includes": [
+        "Recetario digital del Pancake de Kimchi",
+        "Link por correo al video privado de YouTube",
+        "Acceso por 3 meses",
+        "Soporte y dudas por WhatsApp"
+      ],
+      "level": "Principiante",
+      "duration_min": 90,
+      "price_online_usd": 25,
+      "price_presencial_crc": 35000,
+      "photo": "kimchi.jpg",
+      "available_online": true,
+      "available_presencial": true,
+      "location": "Heredia"
+    },
+    { "id": 2, "slug": "bibimbap", "name": "Bibimbap", "name_ko": "비빔밥", "level": "Principiante", "price_online_usd": 25, "price_presencial_crc": 35000, "photo": "bibimbap.jpg", "available_online": true, "available_presencial": true, "location": "Heredia" },
+    { "id": 3, "slug": "tteokbokki", "name": "Tteokbokki", "name_ko": "떡볶이", "level": "Principiante", "price_online_usd": 25, "price_presencial_crc": 35000, "photo": "tteokbokki.jpg", "available_online": true, "available_presencial": true, "location": "Heredia" },
+    { "id": 4, "slug": "japchae", "name": "Japchae", "name_ko": "잡채", "level": "Intermedio", "price_online_usd": 25, "price_presencial_crc": 35000, "photo": "japchae.jpg", "available_online": true, "available_presencial": true, "location": "Heredia" },
+    { "id": 5, "slug": "kimbap", "name": "Kimbap", "name_ko": "김밥", "level": "Principiante", "price_online_usd": 25, "price_presencial_crc": 35000, "photo": "kimbap.jpg", "available_online": true, "available_presencial": true, "location": "Heredia" },
+    { "id": 6, "slug": "mandu", "name": "Mandu (Gyoza)", "name_ko": "만두", "level": "Intermedio", "price_online_usd": 25, "price_presencial_crc": 35000, "photo": "gyoza.jpg", "available_online": true, "available_presencial": true, "location": "Heredia" },
+    { "id": 7, "slug": "kimchi-jjigae", "name": "Kimchi Jjigae", "name_ko": "김치찌개", "level": "Principiante", "price_online_usd": 25, "price_presencial_crc": 35000, "photo": "kimchi-jjigae.jpg", "available_online": true, "available_presencial": true, "location": "Heredia" },
+    { "id": 8, "slug": "bulgogi", "name": "Bulgogi", "name_ko": "불고기", "level": "Intermedio", "price_online_usd": 25, "price_presencial_crc": 35000, "photo": "bulgogi.jpg", "available_online": true, "available_presencial": true, "location": "Heredia" },
+    { "id": 9, "slug": "dakgangjeong", "name": "Dakgangjeong", "name_ko": "닭강정", "level": "Intermedio", "price_online_usd": 25, "price_presencial_crc": 35000, "photo": null, "available_online": true, "available_presencial": true, "location": "Heredia" },
+    { "id": 10, "slug": "sundubu-jjigae", "name": "Sundubu Jjigae", "name_ko": "순두부찌개", "level": "Principiante", "price_online_usd": 25, "price_presencial_crc": 35000, "photo": null, "available_online": true, "available_presencial": true, "location": "Heredia" },
+    { "id": 11, "slug": "pajeon", "name": "Pajeon", "name_ko": "파전", "level": "Principiante", "price_online_usd": 25, "price_presencial_crc": 35000, "photo": null, "available_online": true, "available_presencial": true, "location": "Heredia" },
+    { "id": 12, "slug": "hotteok", "name": "Hotteok", "name_ko": "호떡", "level": "Principiante", "price_online_usd": 25, "price_presencial_crc": 35000, "photo": null, "available_online": true, "available_presencial": true, "location": "Heredia" }
+  ],
+  "presencial_schedule": {
+    "_comment": "Cada fin de semana hay 4 clases distintas (A/B/C/D). Cupo máximo 10 por horario. La chef define qué clase va en cada slot y la ubicación (normalmente Heredia, a veces zonas especiales).",
+    "slots": [
+      { "code": "A", "day": "sábado", "time": "10:00" },
+      { "code": "B", "day": "sábado", "time": "15:00" },
+      { "code": "C", "day": "domingo", "time": "10:00" },
+      { "code": "D", "day": "domingo", "time": "15:00" }
+    ],
+    "max_capacity": 10
+  }
+}

@@ -1,0 +1,63 @@
+/* ============================================================
+   Chef Raquel Chang Kim — Design Tokens
+   Generado desde el Style Sheet de Figma. Única fuente de verdad.
+   ============================================================ */
+
+:root {
+  /* ---- Color · paleta principal ---- */
+  --color-cream:        #FFF0D1; /* fondo principal */
+  --color-terracotta:   #DC7739; /* acento · acciones primarias */
+  --color-green-dark:   #035541; /* secciones · footer */
+  --color-green-light:  #E0E699; /* highlight · tags */
+  --color-brown:        #5C2C15; /* titulares · texto sobre claro */
+  --color-white:        #FFFFFF; /* tarjetas · superficies */
+
+  /* ---- Color · estados / semánticos ---- */
+  --color-error:        #C0392B; /* cupo lleno · errores */
+  --color-available:    #E0E699; /* cupos libres · éxito */
+  --color-whatsapp:     #25D366; /* único botón verde permitido */
+  --color-text:         #2C2C2C; /* cuerpo de texto */
+  --color-text-light:   #FFF0D1; /* texto sobre fondo oscuro */
+
+  /* Estados de botón (terracota) */
+  --color-terracotta-hover:   #C66B33;
+  --color-terracotta-pressed: #B05F2E;
+  --color-whatsapp-hover:     #1FB357;
+  --color-whatsapp-pressed:   #199447;
+
+  /* Bordes / inputs */
+  --color-border:       #E0D2AE;
+
+  /* ---- Tipografía ---- */
+  --font-display: "Fraunces", Georgia, serif;   /* titulares */
+  --font-body:    "Nunito", system-ui, sans-serif; /* cuerpo / UI */
+  --font-accent:  "Caveat", cursive;            /* acentos manuscritos */
+  --font-ko:      "Black Han Sans", sans-serif; /* texto coreano */
+
+  /* Escala tipográfica (desktop) */
+  --fs-h1: 4.5rem;   /* 72px */
+  --fs-h2: 3rem;     /* 48px */
+  --fs-h3: 2.125rem; /* 34px */
+  --fs-h4: 1.5rem;   /* 24px */
+  --fs-body-lg: 1.125rem; /* 18px */
+  --fs-body: 1rem;   /* 16px */
+  --fs-caption: 0.8125rem; /* 13px */
+
+  /* ---- Espaciado (8-pt) ---- */
+  --space-xs:  8px;
+  --space-sm:  16px;
+  --space-md:  24px;
+  --space-lg:  40px;
+  --space-xl:  64px;
+  --space-2xl: 96px;
+
+  /* ---- Radios ---- */
+  --radius-sm:  8px;
+  --radius-md:  16px;
+  --radius-lg:  24px;
+  --radius-xl:  28px;
+  --radius-pill: 999px;
+
+  /* ---- Sombra de tarjeta ---- */
+  --shadow-card: 0 8px 30px rgba(92, 44, 21, 0.08);
+}

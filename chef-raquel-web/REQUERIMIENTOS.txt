@@ -1,0 +1,457 @@
+================================================================================
+REQUERIMIENTOS DEL PROYECTO — CHEF RAQUEL CHANG KIM
+Elaborado por: Blank Studio
+Fecha: 2026-06-20
+Estado: BORRADOR (pendiente confirmación de stack tecnológico)
+================================================================================
+
+1. RESUMEN DEL PROYECTO
+────────────────────────────────────────────────────────────────────────────────
+Cliente: Chef Raquel Chang Kim
+Tipo de proyecto: Diseño, desarrollo y administración de sitio web
+Contexto: La clienta tenía un landing page en Wix. Los costos escalaron (~$200/mes),
+por lo que Blank Studio fue contratado para construir una solución propia desde cero.
+Este es el primer proyecto web desarrollado internamente por Blank Studio con Claude.
+
+Audiencia objetivo:
+- Clientes locales (Costa Rica) — clases presenciales
+- Clientes regionales (México y El Salvador principalmente) — clases en línea y tienda
+
+Dominio: Pendiente. El dominio anterior estaba en Wix y fue perdido.
+
+
+2. DESCRIPCIÓN DEL NEGOCIO
+────────────────────────────────────────────────────────────────────────────────
+Chef Raquel Chang Kim es una chef coreana que ofrece:
+
+a) Clases presenciales de cocina coreana
+   - 4 clases por mes (fines de semana)
+   - 2 horarios por clase: 10:00 AM y 3:00 PM
+   - Cupo máximo: 10 personas por horario
+   - El tipo de clase puede cambiar mes a mes
+
+b) Clases en línea
+   - Alojadas actualmente en YouTube (videos sin listar / unlisted)
+   - Acceso post-pago: la chef desbloquea manualmente o el sistema envía el link
+   - Se venden de forma individual (paquetes: fase 2, no incluir en MVP)
+
+c) Mercadito / Tienda
+   - Kimchi artesanal (producto estrella, 700g, vegano)
+   - Merch de la marca
+   - Otros productos que la chef agregue con el tiempo
+
+Pasarela de pago: POR DEFINIR (reunión pendiente con la clienta).
+Consideraciones: debe funcionar bien para compradores en México y El Salvador.
+Recomendación técnica: Stripe (cobertura MX/SV) o PayPal como respaldo.
+
+
+3. IDENTIDAD DE MARCA
+────────────────────────────────────────────────────────────────────────────────
+Fuente: _brandbook/ y _assets/
+
+Paleta de colores:
+  - Crema/fondo principal:  #FFF0D1
+  - Terracota / naranja:    #DC7739  (color primario de acento)
+  - Verde oliva / lima:     #E0E699  (color secundario claro)
+  - Verde bosque:           #035541  (color secundario oscuro)
+  - Café oscuro:            #5C2C15  (ilustraciones, detalles — extraído de SVGs)
+  - Texto oscuro:           ~#2C2C2C (cuerpo de texto)
+
+Tipografía:
+  - Estilo headings: sans-serif bold redondeada, minúsculas con punto al final
+    Ejemplos: "kimchi." / "datos bancarios." / "chef raquel."
+  - Estilo labels: mayúsculas espaciadas (letter-spacing amplio)
+  - Mezcla de caracteres coreanos (한글) como elemento gráfico cultural
+
+Estilo ilustrativo:
+  - Línea art tipo cute/anime (ilustración de la chef con espátula)
+  - Elementos botánicos y de comida (col, cebolla, ingredientes)
+  - Trazo limpio, rellenos planos en colores de la paleta
+  - Carácter artesanal y cálido, no industrial
+
+Assets disponibles:
+  - 77 SVGs en _assets/graficos/ (variantes de logo, ilustraciones, elementos gráficos)
+  - Brandbook completo en _brandbook/ (formatos .ai y .pdf)
+  - 7 imágenes de referencia en _referencias/ (mood board de Pinterest)
+  - 8 fotos de platos/productos en _assets/fotos/
+
+Tono visual general:
+  - Cálido, artesanal, culturalmente coreano pero accesible para hispanohablantes
+  - No se quiere un diseño que "se vea hecho por IA"
+  - Referencia: etiqueta del kimchi como guía de lenguaje visual aprobado
+
+
+4. ARQUITECTURA DEL SITIO — PÁGINAS Y SECCIONES
+────────────────────────────────────────────────────────────────────────────────
+
+PÁGINA PRINCIPAL (Landing page / Home)
+  [S1] Hero / Bienvenida
+       - Nombre e identidad visual de la chef
+       - Tagline / propuesta de valor breve
+       - CTA principal (ver clases / ir a la tienda)
+
+  [S2] Sobre Raquel (Bio)
+       - Historia de la chef, origen coreano, pasión por la cocina
+       - Foto/ilustración de la chef
+       - Elementos culturales coreanos integrados al diseño
+
+  [S3] Clases presenciales (Calendario mensual)
+       - Vista de las 4 clases del mes con fecha, nombre y horarios (10am / 3pm)
+       - Indicador de disponibilidad (disponible / lleno) por horario
+       - CTA de registro / reserva por clase
+       - El contenido debe ser editable por la chef (ver sección 6)
+
+  [S4] Clases en línea
+       - Catálogo de clases disponibles con foto (placeholder hasta tener fotos reales),
+         nombre, descripción breve y precio
+       - Botón de compra individual por clase
+       - Post-pago: envío automático del link de YouTube al email del comprador
+
+  [S5] Mercadito / Tienda
+       - Productos disponibles: kimchi, merch, otros
+       - Cada producto con foto, nombre, descripción, precio y botón de pedido/compra
+       - Diseño de "mercadito" — cálido, no e-commerce frío
+
+  [S6] Contacto
+       - Formulario de contacto por email
+       - Links a redes sociales
+       - WhatsApp como canal de soporte (comprobantes de pago si la pasarela falla)
+
+
+5. FUNCIONALIDADES REQUERIDAS
+────────────────────────────────────────────────────────────────────────────────
+
+F1 — CALENDARIO DE CLASES PRESENCIALES (editable por la chef)
+     La chef debe poder actualizar mes a mes:
+     - Fechas de las 4 clases
+     - Nombre/tipo de cada clase
+     - Disponibilidad por horario (10am / 3pm)
+     Opciones de implementación (pendiente definir con el dev):
+     a) CMS headless (Contentful, Sanity, Notion como backend)
+     b) Google Sheets como fuente de datos (solución simple, sin costo)
+     c) Panel de administración propio (más trabajo de dev)
+     Recomendación: Google Sheets o Notion para facilidad de uso por la clienta.
+
+F2 — SISTEMA DE REGISTRO Y PAGO (CLASES PRESENCIALES)
+     - Formulario de reserva: nombre, email, clase, horario, cantidad de personas
+     - Pago integrado con pasarela (por definir)
+     - Validación de cupo antes de confirmar (máx. 10 por horario)
+     - Confirmación automática por email al comprador
+     - Notificación automática a la chef cuando hay nueva reserva
+
+F3 — PANEL DE ADMINISTRACIÓN PARA LA CHEF (clases presenciales)
+     La chef debe poder ver:
+     - Lista de personas registradas por clase y horario
+     - Estado de pago (pagado / pendiente)
+     - Comprobante de pago (imagen adjunta o referencia de transacción)
+     Nota: Si la pasarela no soporta esto de forma nativa, el flujo alternativo es
+     que el comprador envíe el comprobante por WhatsApp.
+
+F4 — COMPRA DE CLASES EN LÍNEA + ENTREGA DE ACCESO
+     - Catálogo de clases con precio individual
+     - Flujo de compra con pasarela de pago
+     - Post-pago: envío automático de email con link de YouTube (unlisted)
+       usando webhook de la pasarela → función serverless → email al comprador
+     - Notificación automática a la chef cuando alguien compra
+       (para que esté informada, aunque el proceso sea automático)
+     - Fase 2 (no MVP): paquetes de clases con descuento
+
+F5 — TIENDA / MERCADITO
+     - Catálogo de productos con foto, descripción y precio
+     - Carrito de compras
+     - Checkout con pasarela de pago (misma que el resto del sitio)
+     - La chef debe poder agregar/editar productos sin tocar código
+       (misma solución CMS que el calendario)
+     - Pedidos: notificación a la chef por email cuando hay una compra
+
+F6 — DISEÑO RESPONSIVO
+     - El sitio debe funcionar correctamente en móvil, tablet y desktop
+     - Prioridad mobile-first (los compradores de MX/SV acceden principalmente
+       desde celular)
+
+
+6. GESTIÓN DE CONTENIDO (para la chef)
+────────────────────────────────────────────────────────────────────────────────
+La chef debe poder actualizar de forma autónoma, sin conocimientos técnicos:
+  - Fechas y detalles de clases presenciales (cada mes)
+  - Productos de la tienda (agregar, editar, ocultar)
+  - Fotos de platos y productos cuando las tenga
+  - Precios
+
+Solución recomendada: Panel CMS simple (Notion, Google Sheets como backend,
+o Sanity Studio con interfaz amigable). El dev debe evaluar la mejor opción
+según el stack elegido.
+
+
+7. STACK TECNOLÓGICO
+────────────────────────────────────────────────────────────────────────────────
+DEFINIDO: Confirmado con el dev.
+
+  - Frontend: React / Next.js
+  - Base de datos: SQL (cualquier sabor — PostgreSQL recomendado)
+  - Deploy: Por definir (Vercel es la opción natural para Next.js)
+  - CMS para la chef: Por definir con el dev (opciones: panel propio con
+    Next.js Admin, Sanity, o Payload CMS — todos compatibles con SQL)
+
+Consideraciones:
+  - El repositorio en GitHub debe estar bien documentado para handoff al dev
+  - La chef debe poder actualizar contenido sin tocar código
+  - CDN recomendado para rendimiento en MX y SV
+  - El stack debe soportar webhooks de pasarela de pago para automatización
+
+
+8. PASARELA DE PAGO
+────────────────────────────────────────────────────────────────────────────────
+PENDIENTE: Reunión con la clienta para definir.
+
+Requisitos:
+  - Debe funcionar para compradores en México y El Salvador
+  - Debe soportar webhooks para automatización post-pago
+  - Fees razonables para la chef
+
+Opciones a evaluar con la clienta:
+  - Stripe (excelente cobertura MX/SV, buena API de webhooks)
+  - PayPal (familiar para compradores en LATAM)
+  - MercadoPago (popular en MX)
+
+
+9. ENTREGABLES DEL PROYECTO
+────────────────────────────────────────────────────────────────────────────────
+
+FASE 1 — DISEÑO (Blank Studio)
+  [x] Archivo de requerimientos (este documento)
+  [ ] Diseño completo en Figma
+      - Todas las pantallas en desktop y mobile
+      - Componentes reutilizables
+      - Sistema de design tokens (colores, tipografías, espaciados)
+      - Integración de assets SVG de la marca
+      - Pantallas de estado (vacío, cargando, error, confirmación)
+  [ ] Handoff al dev: Figma con notas de implementación
+  [ ] Assets exportados y organizados
+
+FASE 2 — DESARROLLO
+  [ ] Repositorio GitHub configurado
+  [ ] Ambiente de desarrollo local documentado
+  [ ] Integración CMS para gestión de contenido
+  [ ] Integración pasarela de pago
+  [ ] Sistema de notificaciones (email automático, notificaciones a la chef)
+  [ ] Deploy a producción
+  [ ] Dominio configurado (pendiente que la clienta decida el dominio)
+
+FASE 3 — POST-LANZAMIENTO
+  [ ] Paquetes de clases en línea (descuentos por volumen)
+  [ ] Mejoras basadas en feedback de primeros usuarios
+
+
+10. PENDIENTES / DECISIONES ABIERTAS
+────────────────────────────────────────────────────────────────────────────────
+  [x] Confirmar stack tecnológico con el dev (React / Next.js / SQL)
+  [ ] Definir pasarela de pago con la clienta (reunión pendiente)
+  [ ] Conseguir dominio para el sitio
+  [x] Fotos de platos y productos (8 fotos en _assets/fotos/)
+  [ ] Definir sistema CMS para gestión de contenido por la chef
+  [ ] Confirmar precio de cada clase presencial y en línea
+  [ ] Confirmar precios de productos de la tienda
+  [ ] Definir si el acceso a clases en línea tiene fecha de expiración
+
+
+11. NOTAS ADICIONALES
+────────────────────────────────────────────────────────────────────────────────
+- Este es el primer proyecto web construido por Blank Studio usando Claude.
+  El repositorio y el proceso de diseño en Figma deben estar bien documentados
+  para que el dev externo pueda retomarlo fácilmente.
+
+- El diseño NO debe verse genérico ni generado por IA. Se busca que el resultado
+  refleje el carácter artesanal y la identidad cultural de la chef.
+
+- Las referencias visuales (Pinterest) están en _referencias/.
+  El brandbook completo está en _brandbook/.
+  Los 77 SVGs/assets gráficos están en _assets/graficos/.
+
+- Los compradores en línea son principalmente de México y El Salvador.
+  La experiencia móvil es prioritaria.
+
+================================================================================
+12. DECISIONES DE DISEÑO (confirmadas con cliente — 2026-06-20)
+────────────────────────────────────────────────────────────────────────────────
+
+ARQUITECTURA: Sitio MULTIPÁGINA (no un solo landing). Cada pantalla lleva su
+versión desktop + mobile.
+
+Pantallas de la primera ronda:
+  1. Home — hero con hook real, sobre Raquel, teasers de clases y tienda,
+     prueba social, contacto + footer completo.
+  2. Clases presenciales — calendario del mes + las 4 clases del finde.
+  3. Tienda — clases en línea + mercadito UNIFICADOS, con carrito.
+  4. Carrito / Checkout — resumen, datos del cliente, pasarela.
+  (Panel de la chef / admin: ronda posterior.)
+
+DIRECCIÓN VISUAL: "Mix cálido + premium"
+  - Base crema dominante + terracota como acento principal.
+  - Elegancia editorial: tipografía display grande, foto a sangre completa.
+  - Verde y café SOLO para contraste/estructura puntual, nunca como bloques
+    de sección completos. (Corrige el error de "aplicar todos los colores".)
+
+DISCIPLINA DE PALETA (mapeo semántico — usar con intención, no al azar):
+  - Fondo página      → crema #FFF0D1
+  - Fondo oscuro      → café #5C2C15 (overlays de hero, footer)
+  - Superficie/card   → blanco #FFFFFF
+  - Tinta titulares   → café #5C2C15 (sobre fondo claro)
+  - Tinta cuerpo      → gris cálido oscuro
+  - Tinta inversa     → crema #FFF0D1 (sobre fondo oscuro)
+  - Acento primario   → terracota #DC7739 (botones, énfasis, CTAs)
+  - Acento secundario → verde #035541 (dosis pequeñas)
+  - Highlight         → verde claro #E0E699 (solo tags/pills, muy puntual)
+
+HERO (Home): foto de plato a sangre completa + título display gigante encima.
+  - Foto elegida: KIMCHI (ff944099) — dramática, fondo oscuro, palillos,
+    producto estrella. El rojo conversa con la terracota.
+
+FOTOS REALES (ya subidas a Figma, con imageHash):
+  - Kimchi        6a921de4fd53cad5165de3bd299f0d6affdaea07  → Hero Home / Mercadito
+  - Bibimbap      f223923a9dd4e9b4fc5c3499054ef715ccd7abe7  → Clase en línea
+  - Tteokbokki    22ebb826b00644b16bb9f8e5cb5e0cb28e97d32b  → Clase en línea
+  - Japchae       8c79ab09ce8c0ce473d51f03ee7a454bb986950b  → Clase en línea
+  - Kimbap        4f8bbea170637fc55cd2ff34cab7d0cb563dd985  → Clase en línea
+  - Gyoza         675c11ef49512c33a11fc22cca645655486a34e9  → Mercadito / clase
+  - Jjigae        0297fa2f1fd1d25a102fb1102f54b93fb7d3a512  → Clase presencial
+  - Fideos res    713ffa4add947c470a5bbc1f39ce22f56bd50699  → Clase presencial
+  NOTA: usar fotos reales + ilustraciones SVG del kit. NO emojis ni formas planas.
+
+CLASES PRESENCIALES — lógica correcta del calendario (corrige malentendido):
+  - Son 4 clases DISTINTAS por fin de semana, no la misma repetida:
+      · Clase A → sábado 10:00 AM
+      · Clase B → sábado 3:00 PM
+      · Clase C → domingo 10:00 AM
+      · Clase D → domingo 3:00 PM
+  - Cupo máximo 10 por horario.
+  - El tipo de clase cambia cada mes (editable por la chef).
+  - La sección debe incluir una VISTA DE CALENDARIO visual a la par de las
+    clases, para que la fecha sea fácil de identificar.
+
+TIENDA: clases en línea + mercadito juntos en su propia pantalla, con carrito
+  (ícono de carrito en el nav, badges tipo "Best Seller", precios, filtros).
+  NO van en la primera sección del Home.
+
+FOOTER (real, no tres botones):
+  - Input de correo / suscripción.
+  - Formulario de mensaje (contacto).
+  - MAPA con la ubicación de las clases presenciales.
+  - Redes sociales + WhatsApp.
+  - Wordmark grande de cierre.
+
+REFERENCIAS VISUALES (Pinterest, en _referencias/) — ADN extraído:
+  - Foto a sangre como protagonista del hero.
+  - Tipografía display gigante que rompe la grilla.
+  - UNA base neutra + UN acento dominante (no arcoíris).
+  - Stickers/tags, marquees de texto, elementos flotantes.
+  - Footer con formulario + mapa + wordmark grande.
+  - Tienda con carrito, grid de productos con badges y rating.
+
+ESTADO FIGMA (al 2026-06-20):
+  - Archivo: Blank Studio - MD, página "WEB PAGES".
+  - Colección de variables "Chef Raquel - Brand" creada (18 tokens: colores,
+    spacing, radios).
+  - 8 fotos subidas con sus hashes (arriba).
+  - Primer intento de desktop descartado (se veía genérico). Reconstrucción
+    pendiente con la dirección confirmada.
+  - BLOQUEADO: límite de llamadas de la API de Figma (plan Starter).
+    También el plan Starter limita a 3 páginas. Recomendación: subir plan
+    de Figma para destrabar ambos límites.
+
+13. DATOS REALES DE CONTACTO (confirmados por cliente)
+────────────────────────────────────────────────────────────────────────────────
+  - WhatsApp:   +506 7010 8482  (canal principal: reservas, pedidos, dudas,
+                y lista de difusión mensual de clases — NO hay lista por correo)
+  - Instagram:  https://www.instagram.com/chefraquelchangkim/  (@chefraquelchangkim)
+  - TikTok:     https://www.tiktok.com/@chefraquelchangkim     (@chefraquelchangkim)
+  - Horario:    Todos los días (incluye domingos), 9:00 AM – 6:00 PM (hora CR)
+  - Ubicación:  San José, Costa Rica (dirección exacta se da al reservar)
+
+  PENDIENTE de cliente:
+  - Foto y precio reales del merch (placeholder actual: Tote bag ₡9.500)
+  - Número real de seguidores IG/TikTok (placeholder: 12.4k / 8.1k)
+
+ESTRUCTURA DE LA HOME (orden final de secciones):
+  Hero (foto kimchi) → Marquee → Sobre Raquel → Clases (teaser) →
+  Mercadito (banda verde) → Redes "La cocina, en vivo" → Contacto (tarjeta
+  terracota con WhatsApp + mapa) → Footer (verde full-width, logo SVG + redes + CTA)
+
+14. SEGUNDA RONDA DE DISEÑO — PANTALLAS Y SISTEMA (2026-06-24)
+────────────────────────────────────────────────────────────────────────────────
+PANTALLAS DESKTOP (6 en total):
+  1. Home
+  2. Clases presenciales (calendario + 4 del finde + catálogo de 12)
+  3. Tienda (clases en línea + categorías: Kimchi / Kits / Merch, con carrito)
+  4. Checkout (carrito 3 tipos de ítem + datos + pasarela)
+  5. Detalle de clase/receta (explica el plato + modalidad en línea/presencial)
+  6. Panel interno de la chef (dashboard editable — solo desktop)
+  + Style Sheet (sistema de diseño documentado)
+
+SISTEMA DE DISEÑO (stylesheet — única fuente de verdad):
+  - Tipografía: Fraunces (display) · Nunito (cuerpo/UI) · Caveat (acentos) ·
+    Black Han Sans / Gothic A1 (coreano)
+  - REGLA DE BOTONES: toda acción principal (Reservar, Agregar, Pagar, Pedir)
+    en TERRACOTA. WhatsApp es la única excepción (verde #25D366).
+    Secundario = contorno terracota.
+  - Header y footer IDÉNTICOS en las 4 páginas públicas.
+
+PRECIOS:
+  - Clase presencial: ₡35.000 (~$68)
+  - Clase en línea:   ₡17.500 (~$34)  (mitad)
+
+UBICACIÓN: Las clases presenciales son normalmente en HEREDIA. Hay clases
+  especiales en otras zonas (ej. Cartago) que la chef define manualmente desde
+  el panel interno.
+
+FOOTER: las cápsulas sobre el logo son frases en coreano (한국음식 · 맛있다 ·
+  사랑해요 · 감사합니다) en verde claro / terracota. El acceso a redes y WhatsApp
+  vive en las columnas del footer.
+
+DETALLE DE CLASE: cada clase/producto enlaza a una página de detalle que
+  explica de qué trata la receta (importante para clientes de CR y MX que no
+  conocen el platillo) + qué incluye + modalidad + fechas.
+
+PANEL INTERNO (dashboard de la chef, solo desktop):
+  - Sidebar: Clases presenciales · Clases en línea · Productos · Calendario ·
+    Reservas y pagos.
+  - Tabla editable + modal "Editar clase" (foto, precio, cupos, fecha, hora,
+    ubicación, toggle en línea) + Guardar. Ella agrega/edita/elimina sin código.
+
+15. MODELO DE PAGO Y ACCESO REAL (de su página actual en Wix — 2026-06-24)
+────────────────────────────────────────────────────────────────────────────────
+PAGO (NO hay pasarela de tarjeta por ahora — flujo manual):
+  Métodos: SINPE Móvil · Transferencia en colones (BAC) · Transferencia en
+  dólares (para MX/SV) · PayPal.
+  Flujo: el cliente paga por el método elegido y ENVÍA EL COMPROBANTE por
+  WhatsApp con su nombre y lo que compró. La chef confirma el cupo/acceso.
+  → El Checkout refleja esto: muestra datos de pago + botón "Enviar
+    comprobante por WhatsApp". (Tarjeta de crédito queda para fase futura.)
+
+DATOS BANCARIOS (de _brandbook/):
+  - SINPE Móvil: 7010-8482
+  - Titular: Raquel Chang Kim
+  - BAC San José · Cuenta: 906518527
+  - IBAN: CR65010200009065185277
+
+ACCESO A CLASES EN LÍNEA:
+  - Tras confirmar el pago, la chef envía por CORREO un link a un video
+    privado de YouTube (no listado).
+  - Acceso por 3 MESES (no permanente).
+  - Incluye: libro de recetas digital + lista de ingredientes + soporte WhatsApp.
+
+CONTENIDO QUE LA CHEF DA POR CADA CLASE (replicar en Detalle):
+  ¿por qué aprender la receta? · ¿qué incluye? · ¿dónde se ve la clase (virtual)?
+  · método de pago.
+
+PRECIO EN LÍNEA (CONFIRMADO): USD 25 por clase (~₡12.600 vía SINPE).
+  Presencial sigue en ₡35.000. El sitio muestra las clases en línea en dólares
+  (compradores de MX/SV) y el equivalente en colones en el checkout SINPE.
+
+NOTA: la clase de ejemplo en la pantalla "Detalle" usa el contenido REAL de
+  "Pancake de Kimchi" (descripción, por qué aprenderla, qué incluye, acceso)
+  tomado de su página actual. Hay ~12 clases en línea (pueden ser más).
+
+================================================================================
+Documento vivo — actualizar cuando se tomen las decisiones pendientes.
+================================================================================
