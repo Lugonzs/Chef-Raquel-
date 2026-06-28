@@ -1,0 +1,15 @@
+{
+  "_comment": "Datos de ejemplo para la tienda (mercadito). La chef los administra desde el panel interno. Precios en CRC. Envíos a todo el país.",
+  "categories": ["kimchi", "kits", "merch"],
+  "products": [
+    { "id": 1, "category": "kimchi", "name": "Kimchi Tradicional", "desc": "700g · Vegano", "price_crc": 6500, "photo": "kimchi.jpg", "badge": "MÁS VENDIDO" },
+    { "id": 2, "category": "kimchi", "name": "Kimchi Extra Picante", "desc": "700g · Vegano", "price_crc": 7000, "photo": "kimchi.jpg", "badge": null },
+    { "id": 3, "category": "kimchi", "name": "Kimchi de Rábano", "desc": "500g · Kkakdugi", "price_crc": 6000, "photo": "kimchi.jpg", "badge": null },
+    { "id": 4, "category": "kits", "name": "Kit Bibimbap", "desc": "Para 2 · Ingredientes listos", "price_crc": 12000, "photo": "bibimbap.jpg", "badge": null },
+    { "id": 5, "category": "kits", "name": "Kit Tteokbokki", "desc": "Para 2 · Listo en 15 min", "price_crc": 10000, "photo": "tteokbokki.jpg", "badge": null },
+    { "id": 6, "category": "kits", "name": "Set de Especias Coreanas", "desc": "Kit completo", "price_crc": 14000, "photo": null, "badge": null },
+    { "id": 7, "category": "merch", "name": "Tote bag · Kimchi Club", "desc": "100% algodón · estampado naranja", "price_crc": 9500, "photo": "merch/tote-kimchi-club.png", "badge": null },
+    { "id": 8, "category": "merch", "name": "Tote bag · Flavor Club", "desc": "100% algodón · estampado naranja", "price_crc": 9500, "photo": "merch/tote-flavor-club.png", "badge": null },
+    { "id": 9, "category": "merch", "name": "Tote bag · Kimchi Verde", "desc": "100% algodón · estampado verde", "price_crc": 9500, "photo": "merch/tote-kimchi-verde.png", "badge": null }
+  ]
+}
